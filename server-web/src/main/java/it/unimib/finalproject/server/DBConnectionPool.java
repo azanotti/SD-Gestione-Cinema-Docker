@@ -15,7 +15,7 @@ public class DBConnectionPool {
         // Initialize the connection pool with socket instances
         for (int i = 0; i < MAX_POOL_SIZE; i++) {
             try {
-                Socket socket = new Socket("localhost", 3030);
+                Socket socket = new Socket("10.0.0.2", 3030);
                 availableConnections.add(socket);
             } catch (IOException e) {
             	Logger.getLogger(DBConnectionPool.class.getName()).severe("Errore durante la creazione della socket: " + e.getMessage());
