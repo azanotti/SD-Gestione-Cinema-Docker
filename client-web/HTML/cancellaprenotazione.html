@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cinema (Powered by Combi S.P.A.)</title>
+    <link rel="stylesheet" href="../CSS/styles.css">
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="top-bar">
+            <a href="index.html">Home</a>
+            <a href="movies.html">Acquista Biglietti</a>
+            <a href="modificaprenotazione.html">Modifica Prenotazione</a>
+            <a href="cancellaprenotazione.html">Cancella Prenotazione</a>
+        </div>
+    </div>
+    <div id="full-width-div">
+        <!-- Form to input ID -->
+        <form id="deleteForm">
+            <label for="bookingId">ID Prenotazione:</label>
+            <input type="text" id="bookingId" name="bookingId">
+            <button type="button" onclick="deleteBooking()">Delete</button>
+        </form>
+
+        <!-- Message Box -->
+        <div id="messageBox" class="message-box"></div>
+    </div>
+
+    <script>
+        function deleteBooking() {
+            var bookingId = document.getElementById("bookingId").value;
+            var requestOptions = {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            };
+
+            fetch('http://localhost:8080/prenotazione/' + bookingId, requestOptions)
+                .then(response => {
+                    if (response.ok) {
+                        displayMessage("Prenotazione cancellata con successo", true);
+                    } else {
+                        displayMessage("Errore durante la cancellazione della prenotazione", false);
+                    }
+                })
+                .catch(error => {
+                    displayMessage("Error deleting the booking: " + error, false);
+                });
+        }
+
+        function displayMessage(message, isSuccess) {
+            var messageBox = document.getElementById("messageBox");
+            messageBox.textContent = message;
+            messageBox.classList.remove("error");
+            messageBox.classList.remove("success");
+
+            if (isSuccess) {
+                messageBox.classList.add("success");
+            } else {
+                messageBox.classList.add("error");
+            }
+        }
+
+        // Prevent form submission
+        var deleteForm = document.getElementById("deleteForm");
+        deleteForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+        });
+    </script>
+</body>
+
+</html>

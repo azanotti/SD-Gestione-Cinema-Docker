@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Film Booking System - Movies</title>
+        <link rel="stylesheet" href="../CSS/styles.css">
+        
+        <script src="../Javascript/data.js"></script>
+    </head>
+
+    <body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar">
+            <a href="index.html">Home</a>
+            <a href="movies.html">Acquista Biglietti</a>
+            <a href="modificaprenotazione.html">Modifica Prenotazione</a>
+            <a href="cancellaprenotazione.html">Cancella Prenotazione</a>
+        </div>
+    </div>
+
+    <!-- Top Bar -->
+        <div id="full-width-div">
+            <div class="top-bar">
+                <a href="movies.html">Movies</a>
+                <span class="indicator-triangle"></span>
+                <a class="locked">Date</a>
+                <span class="indicator-triangle"></span>
+                <a class="locked">Seats</a>
+                <span class="indicator-triangle"></span>
+                <a class="locked">Payment</a>
+            </div>
+
+            <h1>Film Booking System</h1>
+
+            <!-- Movies Page Content -->
+            <h2>Select a Movie</h2>
+            <ul id="movie-list"></ul>
+        </div>
+
+        <script>
+            displayMovies();
+        </script>
+
+    </body>
+</html>
