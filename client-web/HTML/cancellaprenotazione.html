@@ -37,7 +37,7 @@
                 },
             };
 
-            fetch('http://localhost:8080/prenotazione/' + bookingId, requestOptions)
+            fetch('http://10.0.0.3:8080/prenotazione/' + bookingId, requestOptions)
                 .then(response => {
                     if (response.ok) {
                         displayMessage("Prenotazione cancellata con successo", true);

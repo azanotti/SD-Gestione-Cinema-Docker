@@ -1,5 +1,5 @@
 function getFilms() {
-    fetch('http://localhost:8080/film')
+    fetch('http://10.0.0.3:8080/film')
         .then(response => response.json())
         .then(films => {
             // Display the list of films
@@ -18,7 +18,7 @@ function getFilms() {
 }
 
 function getFilmDetails(filmId) {
-    fetch(`http://localhost:8080/film/${filmId}`)
+    fetch(`http://10.0.0.3:8080/film/${filmId}`)
         .then(response => response.json())
         .then(film => {
             // Display the film details
@@ -44,7 +44,7 @@ function addFilm() {
             description: description
         };
 
-        fetch('http://localhost:8080/film', {
+        fetch('http://10.0.0.3:8080/film', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -86,7 +86,7 @@ function bookSeats() {
             seats: selectedSeats
         };
 
-        fetch('http://localhost:8080/booking', {
+        fetch('http://10.0.0.3:8080/booking', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -110,7 +110,7 @@ function displayMovies() {
     // JavaScript code to fetch and display movie data
     const movieListContainer = document.getElementById("movie-list");
 
-    fetch("http://localhost:8080/film")
+    fetch("http://10.0.0.3:8080/film")
         .then(response => response.json())
         .then(data => {
             data.forEach(movie => {
@@ -148,7 +148,7 @@ function showSelectedMovieCover() {
     const selectedMovieElement = document.getElementById("selected-movie");
 
     // Fetch the movie data using the selected movie ID
-    fetch("http://localhost:8080/film")
+    fetch("http://10.0.0.3:8080/film")
         .then(response => response.json())
         .then(data => {
             const selectedMovie = data.find(movie => movie.id === selectedMovieId);
@@ -188,7 +188,7 @@ function loadDateOptions() {
     const selectedMovieId = sessionStorage.getItem("selectedMovieId");
 
     // Retrieve the projection list for the selected movie
-    const projectionListUrl = `http://localhost:8080/proiezione/${selectedMovieId}`;
+    const projectionListUrl = `http://10.0.0.3:8080/proiezione/${selectedMovieId}`;
 
     // Fetch the projection list data using the selected movie ID
     fetch(projectionListUrl)
@@ -222,7 +222,7 @@ function loadTimeOptions() {
     const timePickerElement = document.getElementById("time-picker");
 
     // Retrieve the projection list for the selected movie and date
-    const projectionListUrl = `http://localhost:8080/proiezione/${selectedMovieId}`;
+    const projectionListUrl = `http://10.0.0.3:8080/proiezione/${selectedMovieId}`;
 
     // Fetch the projection list data using the selected movie ID
     fetch(projectionListUrl)
@@ -281,7 +281,7 @@ function handleNextButtonClick() {
 
     // Retrieve the projection list for the selected movie and date
     const selectedMovieId = sessionStorage.getItem("selectedMovieId");
-    const projectionListUrl = `http://localhost:8080/proiezione/${selectedMovieId}`;
+    const projectionListUrl = `http://10.0.0.3:8080/proiezione/${selectedMovieId}`;
 
     // Fetch the projection list data using the selected movie ID
     fetch(projectionListUrl)
@@ -307,7 +307,7 @@ function handleNextButtonClick() {
 function showSeats() {
     const seatsContainer = document.getElementById("seats-container");
 
-    const projectionListUrl = `http://localhost:8080/proiezione/${selectedMovieId}`;
+    const projectionListUrl = `http://10.0.0.3:8080/proiezione/${selectedMovieId}`;
 
     // Fetch the seat data from the JSON file (replace with your JSON URL)
     fetch(projectionListUrl)

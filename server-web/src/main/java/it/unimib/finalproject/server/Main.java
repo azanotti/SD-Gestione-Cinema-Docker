@@ -23,7 +23,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         final HttpServer server = startServer();
         Logger.getLogger(Main.class.getName()).info("Server Jersey avviato con endpoint: " + BASE_URI +"\nUsare CTRL+C per fermarlo");
-        System.in.read();
-        server.shutdownNow();
+        //System.in.read();
+        //server.shutdownNow();
     }
 }

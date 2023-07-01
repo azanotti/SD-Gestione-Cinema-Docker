@@ -55,7 +55,7 @@
                     }
                 };
 
-                var response = await fetch('http://localhost:8080/prenotazione/' + bookingId, requestOptions);
+                var response = await fetch('http://10.0.0.3:8080/prenotazione/' + bookingId, requestOptions);
 
                 if (response.ok) {
                     var bookingData = await response.json();

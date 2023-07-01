@@ -43,7 +43,7 @@
             var seatingPlanElement = document.getElementById("seatingPlan");
             var selectedSeats = [];
 
-            var apiUrl = "http://localhost:8080/proiezione/" + projectionId;
+            var apiUrl = "http://10.0.0.3:8080/proiezione/" + projectionId;
 
             fetch(apiUrl)
                 .then(response => response.json())
@@ -110,7 +110,7 @@
                     body: JSON.stringify(requestBody)
                 };
 
-                fetch('http://localhost:8080/prenotazione', requestOptions)
+                fetch('http://10.0.0.3:8080/prenotazione', requestOptions)
                     .then(response => {
                         if (response.ok) {
                             // Retrieve the redirect URL from the response headers
