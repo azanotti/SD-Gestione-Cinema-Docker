@@ -95,6 +95,14 @@ public class PrenotazioneResources {
     	
     	ArrayList<Posto> postiPrenotati = prenotazioneObj.getPosti();
     	Proiezione proiezioneRichiesta = ProiezioneResources.exportProiezione(proiezione);
+    	
+    	
+    	//Controllo se la prenotazione e' effettuabile
+    	boolean inserimentoValido = true;
+    	
+    	//Itero sui posti e se anche uno e' gia' prenotato mi fermo
+    	//successivamente se false ritorna errore altrimenti imposta
+    	//il codice sui posti selezionati
     	for(int i = 0; i < postiPrenotati.size(); i++) {
     		Posto[][] postiGiaPrenotati = proiezioneRichiesta.getPrenotazioniSala();
     		
@@ -103,13 +111,25 @@ public class PrenotazioneResources {
     		int numero = posto.getNumero();
     		posto.setCodice(id);
     		
-    		//TODO: occuperei posti inutilmente se uno e' valido e gli altri no
-    		//TODO: riscrivere questo metodo per controllare che tutti i posti siano liberi
-    		if(postiGiaPrenotati[fila][numero].getCodice().equals("")) {
-    			proiezioneRichiesta.setCodicePosto(fila, numero, id);
-    		} else {
-    			return Response.status(Response.Status.BAD_REQUEST).build();
-    		} 		
+    		if(!(postiGiaPrenotati[fila][numero].getCodice().equals("") || postiGiaPrenotati[fila][numero].getCodice().equals(id))) {
+    			inserimentoValido = false;
+    		}	
+    	}
+    	
+    	//Effettuo la prenotazione
+    	if(inserimentoValido) {
+    		for(int i = 0; i < postiPrenotati.size(); i++) {
+        		Posto[][] postiGiaPrenotati = proiezioneRichiesta.getPrenotazioniSala();
+        		
+        		Posto posto = postiPrenotati.get(i);
+        		int fila = posto.getFila();
+        		int numero = posto.getNumero();
+        		posto.setCodice(id);
+        		        		
+        		proiezioneRichiesta.setCodicePosto(fila, numero, id);		
+        	}
+    	} else {
+    		return Response.status(Response.Status.BAD_REQUEST).build();
     	}
     	
     	String proiezioneAggiornata = null;
@@ -307,19 +327,39 @@ public class PrenotazioneResources {
     	//Logica di prenotazione nuovi posti
     	Proiezione proiezioneRichiesta = ProiezioneResources.exportProiezione(proiezione);
     	Posto[][] postiGiaPrenotati = proiezioneRichiesta.getPrenotazioniSala();
-    	for(int i = 0; i < postiAggiornati.size(); i++) {
-    		Posto posto = postiAggiornati.get(i);
+    	//Controllo se la prenotazione e' effettuabile
+    	boolean inserimentoValido = true;
+    	
+    	//Itero sui posti e se anche uno e' gia' prenotato mi fermo
+    	//successivamente se false ritorna errore altrimenti imposta
+    	//il codice sui posti selezionati
+    	for(int i = 0; i < postiPrenotati.size(); i++) {
+    		Posto[][] postiGiaPrenotati = proiezioneRichiesta.getPrenotazioniSala();
+    		
+    		Posto posto = postiPrenotati.get(i);
     		int fila = posto.getFila();
     		int numero = posto.getNumero();
     		posto.setCodice(id);
     		
-    		//TODO: occuperei posti inutilmente se uno e' valido e gli altri no
-    		//TODO: riscrivere questo metodo per controllare che tutti i posti siano liberi
-    		if(postiGiaPrenotati[fila][numero].getCodice().equals("")) {
-    			proiezioneRichiesta.setCodicePosto(fila, numero, id);
-    		} else {
-    			return Response.status(Response.Status.BAD_REQUEST).build();
-    		} 	
+    		if(!(postiGiaPrenotati[fila][numero].getCodice().equals("") || postiGiaPrenotati[fila][numero].getCodice().equals(id))) {
+    			inserimentoValido = false;
+    		}	
+    	}
+    	
+    	//Effettuo la prenotazione
+    	if(inserimentoValido) {
+    		for(int i = 0; i < postiPrenotati.size(); i++) {
+        		Posto[][] postiGiaPrenotati = proiezioneRichiesta.getPrenotazioniSala();
+        		
+        		Posto posto = postiPrenotati.get(i);
+        		int fila = posto.getFila();
+        		int numero = posto.getNumero();
+        		posto.setCodice(id);
+        		        		
+        		proiezioneRichiesta.setCodicePosto(fila, numero, id);		
+        	}
+    	} else {
+    		return Response.status(Response.Status.BAD_REQUEST).build();
     	}
     	
     	String proiezioneAggiornata = null;
